@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renta de Autos en Cancún — Hertz México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD000;
+    --black: #1A1A1A;
+    --dark: #333333;
+    --mid: #666666;
+    --light: #F5F5F5;
+    --border: #E0E0E0;
+    --green: #2E7D32;
+    --blue: #0277BD;
+    --white: #FFFFFF;
+    --font: 'Montserrat', sans-serif;
+    --body: 'Open Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); color: var(--dark); background: var(--white); font-size: 15px; line-height: 1.6; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: var(--black);
+    color: #aaa;
+    font-size: 12px;
+    padding: 6px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+  }
+  .topbar a { color: #ccc; text-decoration: none; font-size: 12px; }
+  .topbar .ayasa { color: var(--yellow); font-weight: 700; }
+  .topbar .login-btn {
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--font);
+    font-size: 11px;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: var(--yellow);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .logo { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .logo-box {
+    background: var(--black);
+    color: var(--yellow);
+    font-family: var(--font);
+    font-weight: 900;
+    font-size: 21px;
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .logo-sub {
+    font-family: var(--font);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2px; list-style: none; flex: 1; }
+  .nav-links a {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background .2s;
+  }
+  .nav-links a:hover { background: rgba(0,0,0,0.1); }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .nav-right select { font-family: var(--font); font-size: 12px; font-weight: 600; border: none; background: transparent; cursor: pointer; }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0,60,120,0.55) 0%,
+      rgba(0,100,160,0.3) 40%,
+      rgba(0,140,200,0.15) 70%,
+      rgba(0,0,0,0.5) 100%),
+      linear-gradient(135deg, #00bcd4 0%, #0288d1 30%, #0077b6 60%, #023e8a 100%);
+      background-image: url(pptx_extracted/ppt/media/temp_24e6f3085e.webp);
+  }
+  /* Cancún beach skyline SVG */
+  .hero-skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    opacity: 0.35;
+  }
+  /* Simulate hotel strip */
+  .hotel-strip {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    display: flex;
+    gap: 4px;
+    padding: 0 40px;
+    align-items: flex-end;
+    opacity: 0.5;
+  }
+  .hotel-block {
+    background: rgba(255,255,255,0.5);
+    border-radius: 3px 3px 0 0;
+    flex-shrink: 0;
+  }
+  .water-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45px;
+    background: linear-gradient(180deg, rgba(0,188,212,0.6) 0%, rgba(2,136,209,0.8) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+    padding: 0 24px 24px;
+    color: white;
+  }
+  .hero-content h1 {
+    font-family: var(--font);
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 900;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    letter-spacing: -0.5px;
+  }
+  .hero-content p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* ── RESERVA BAR ── */
+  .reserva-bar {
+    background: var(--yellow);
+    padding: 14px 24px;
+    text-align: center;
+  }
+  .reserva-bar h2 {
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SEARCH FORM ── */
+  .search-section {
+    background: var(--white);
+    background-color: #ffd000;
+    padding: 20px 24px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-bottom: 2px solid var(--border);
+  }
+  .search-wrapper { max-width: 1100px; margin: 0 auto; }
+  .search-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 8px;
+    align-items: end;
+    margin-bottom: 8px;
+  }
+  .search-label {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mid);
+    width: 90px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  .field-input {
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 12px;
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--dark);
+    background: #fafafa;
+    outline: none;
+    width: 100%;
+    transition: border-color .2s;
+    height: 40px;
+  }
+  .field-input:focus { border-color: var(--yellow); background: white; }
+  .field-small { width: 100px; }
+  .field-time { width: 90px; }
+  .search-bottom {
+    display: grid;
+    grid-template-columns: auto 1fr 80px 80px 80px 1fr 180px;
+    gap: 8px;
+    align-items: end;
+  }
+  .pax-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pax-label {
+    font-family: var(--font);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--mid);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .pax-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pax-input {
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    width: 64px;
+    height: 36px;
+    text-align: center;
+    font-size: 13px;
+    font-family: var(--font);
+    font-weight: 600;
+    outline: none;
+  }
+  .promo-box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .promo-box label {
+    font-family: var(--font);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+  .btn-reservar {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    height: 42px;
+    padding: 0 20px;
+    font-family: var(--font);
+    font-weight: 800;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform .2s, box-shadow .2s;
+    white-space: nowrap;
+  }
+  .btn-reservar:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,208,0,.4); }
+
+  /* ── CONTENT SECTIONS ── */
+  .section { padding: 52px 24px; }
+  .inner { max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-family: var(--font);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .section-title.center { text-align: center; }
+
+  /* ── INTRO TEXT ── */
+  .intro-section { background: var(--white); }
+  .intro-section h2 {
+    font-family: var(--font);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+  .intro-section p {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  /* ── PROMO + RENTA ── */
+  .promo-renta-section { background: var(--light); }
+  .promo-renta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .promo-card {
+    background: var(--white);
+    background-color: #ffd000;
+    background-size: cover;
+    border-radius: 12px;
+    padding: 32px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .promo-badge {
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .promo-badge .off-num {
+    font-family: var(--font);
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+    display: block;
+  }
+  .promo-badge .off-pct {
+    font-family: var(--font);
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--black);
+    display: block;
+    margin-top: -8px;
+  }
+  .promo-badge .off-sub {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--mid);
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+  .promo-car {
+    flex: 1;
+    text-align: center;
+    font-size: 72px;
+  }
+  .paypal-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    color: #003087;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .paypal-logo {
+    background: #003087;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 800;
+    font-style: italic;
+  }
+  .renta-info h3 {
+    font-family: var(--font);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+  .renta-info .highlight {
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .renta-info p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .renta-info .italic {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mid);
+  }
+
+  /* ── ¿POR QUÉ RESERVAR? ── */
+  .porq-section { background: var(--white); }
+  .porq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .porq-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .porq-card:hover { border-color: var(--yellow); box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .porq-card.featured {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .porq-icon { font-size: 40px; margin-bottom: 14px; display: block; }
+  .porq-card h4 {
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .porq-card p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+  .porq-card.featured p { color: var(--dark); }
+
+  /* ── VENTAJAS ── */
+  .ventajas-section { background: var(--light); }
+  .ventajas-section h2 {
+    font-family: var(--font);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+  .ventaja-item {
+    margin-bottom: 18px;
+    padding-left: 20px;
+    border-left: 3px solid var(--yellow);
+  }
+  .ventaja-item strong {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+  }
+  .ventaja-item p { font-size: 13px; color: var(--mid); line-height: 1.6; margin-top: 3px; }
+  .consejos-box {
+    background: var(--white);
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    padding: 20px;
+    margin-top: 24px;
+  }
+  .consejos-box h4 {
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .consejos-box p { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+  /* ── OFICINAS ── */
+  .oficinas-section { background: var(--white); padding: 0; }
+  .oficinas-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr 340px;
+    min-height: 520px;
+  }
+  /* Left panel */
+  .oficinas-list {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    max-height: 520px;
+  }
+  .oficinas-search {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--light);
+  }
+  .oficinas-search input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 13px;
+    outline: none;
+  }
+  .search-icon {
+    width: 32px; height: 32px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .oficina-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .oficina-item:hover { background: #fffbe0; }
+  .oficina-item.active { background: var(--yellow); }
+  .oficina-item .oi-icon { font-size: 16px; flex-shrink: 0; }
+  .oficina-item .oi-name {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+  }
+  .servicios-especiales {
+    padding: 14px 16px;
+    background: var(--light);
+    border-top: 1px solid var(--border);
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .servicios-items {
+    display: flex;
+    gap: 16px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--mid);
+    flex-wrap: wrap;
+  }
+  .serv-item { display: flex; align-items: center; gap: 6px; }
+  /* Map center */
+  .mapa-center {
+    background: #e8f5e9;
+    position: relative;
+    overflow: hidden;
+  }
+  .mapa-embed {
+    width: 100%; height: 100%;
+    min-height: 520px;
+    background: linear-gradient(145deg, #c8e6c9, #a5d6a7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    font-family: var(--font);
+    color: #2e7d32;
+    position: relative;
+  }
+  /* Simulate map roads */
+  .map-road {
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+  }
+  .map-pin-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pin-circle {
+    width: 36px; height: 36px;
+    background: var(--yellow);
+    border: 3px solid var(--black);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pin-circle span {
+    transform: rotate(45deg);
+    font-size: 16px;
+  }
+  .pin-label {
+    margin-top: 8px;
+    background: var(--white);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--black);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    white-space: nowrap;
+  }
+  /* Simulated map labels */
+  .maplabel {
+    position: absolute;
+    background: rgba(255,255,255,0.85);
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  /* Right panel */
+  .oficina-detail {
+    padding: 28px;
+    border-left: 1px solid var(--border);
+    background: var(--white);
+  }
+  .oficina-detail h3 {
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
+  .detail-row {
+    margin-bottom: 16px;
+  }
+  .detail-row label {
+    font-family: var(--font);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .detail-row p {
+    font-size: 13px;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+  .detail-row strong { font-family: var(--font); font-weight: 700; }
+  .hours-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: var(--green);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  /* ── TÉRMINOS ── */
+  .terminos-section {
+    background: var(--light);
+    border-top: 1px solid var(--border);
+  }
+  .terminos-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 16px;
+  }
+  .terminos-toggle h3 {
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .toggle-icon {
+    width: 24px; height: 24px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .2s;
+  }
+  .terminos-body {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.7;
+    display: none;
+  }
+  .terminos-body.open { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: #aaa;
+    padding: 40px 24px 20px;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .footer-col h5 {
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: color .15s;
+  }
+  .footer-col a:hover { color: var(--yellow); }
+  .newsletter-col input {
+    border: 1px solid #444;
+    background: #222;
+    border-radius: 5px;
+    padding: 8px 10px;
+    color: #ccc;
+    font-size: 12px;
+    width: 100%;
+    margin-bottom: 8px;
+    outline: none;
+  }
+  .newsletter-col button {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    font-family: var(--font);
+    font-weight: 800;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 100%;
+  }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: #555;
+  }
+  .footer-badges { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .badge {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #bbb;
+    font-family: var(--font);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    nav .nav-links { display: none; }
+    .promo-renta-grid { grid-template-columns: 1fr; }
+    .porq-grid { grid-template-columns: 1fr; }
+    .oficinas-layout { grid-template-columns: 1fr; }
+    .oficinas-list { max-height: 300px; }
+    .mapa-embed { min-height: 300px; }
+    .oficina-detail { border-left: none; border-top: 1px solid var(--border); }
+    .search-row { grid-template-columns: 1fr; }
+    .search-bottom { grid-template-columns: 1fr 1fr; }
+    .section { padding: 36px 16px; }
+  }
+  @media(max-width: 600px) {
+    .hero { height: 200px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .promo-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="#">Servicios</a>
+  <a href="#">Consultar reserva</a>
+  <span>🌐 ESPAÑOL ▾</span>
+  <a href="#" class="ayasa">AYASA Members</a>
+  <a href="#" class="login-btn">INICIAR SESIÓN</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <div class="logo-box">Hertz</div>
+    <div class="logo-sub">System<br>Licensee</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Promociones</a></li>
+    <li><a href="#">Flota</a></li>
+    <li><a href="#">Oficinas</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Consultar reserva</a></li>
+  </ul>
+  <div class="nav-right">
+    <span>🌐</span>
+    <select><option>ESPAÑOL</option><option>ENGLISH</option></select>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!-- Hotel strip simulation -->
+  <div class="hotel-strip">
+    <div class="hotel-block" style="width:18px;height:60px;"></div>
+    <div class="hotel-block" style="width:14px;height:80px;"></div>
+    <div class="hotel-block" style="width:22px;height:100px;"></div>
+    <div class="hotel-block" style="width:16px;height:70px;"></div>
+    <div class="hotel-block" style="width:20px;height:90px;"></div>
+    <div class="hotel-block" style="width:12px;height:65px;"></div>
+    <div class="hotel-block" style="width:18px;height:110px;"></div>
+    <div class="hotel-block" style="width:15px;height:75px;"></div>
+    <div class="hotel-block" style="width:24px;height:95px;"></div>
+    <div class="hotel-block" style="width:20px;height:85px;"></div>
+    <div class="hotel-block" style="width:16px;height:72px;"></div>
+    <div class="hotel-block" style="width:22px;height:105px;"></div>
+    <div class="hotel-block" style="width:18px;height:88px;"></div>
+    <div class="hotel-block" style="width:14px;height:62px;"></div>
+    <div class="hotel-block" style="width:20px;height:92px;"></div>
+    <div class="hotel-block" style="width:16px;height:78px;"></div>
+    <div class="hotel-block" style="width:12px;height:68px;"></div>
+  </div>
+  <div class=""></div>
+  <div class="hero-content">
+    <h1>Renta de Autos en Cancún</h1>
+    <p>Explora el paraíso caribeño con total libertad — Hertz México te acompaña</p>
+  </div>
+</section>
+
+<!-- RESERVA BAR -->
+<div class="reserva-bar">
+  <h2>Reserva Aquí</h2>
+</div>
+
+<!-- SEARCH FORM -->
+<section class="search-section">
+  <div class="search-wrapper">
+    <!-- Row 1: Recogida -->
+    <div style="display:grid;grid-template-columns:90px 1fr 110px 110px;gap:8px;margin-bottom:8px;align-items:end;">
+      <div style="font-family:var(--font);font-size:12px;font-weight:700;color:var(--mid);display:flex;align-items:center;height:40px;">Recogida</div>
+      <input class="field-input" type="text" placeholder="¿Dónde necesitas tu auto?">
+      <input class="field-input" type="date" style="font-size:12px;">
+      <input class="field-input field-time" type="time" value="10:00" style="font-size:12px;">
+    </div>
+    <!-- Row 2: Devolución -->
+    <div style="display:grid;grid-template-columns:90px 1fr 110px 110px;gap:8px;margin-bottom:8px;align-items:end;">
+      <div style="font-family:var(--font);font-size:12px;font-weight:700;color:var(--mid);display:flex;align-items:center;height:40px;">Devolución</div>
+      <input class="field-input" type="text" placeholder="¿Dónde termina tu viaje?">
+      <input class="field-input" type="date" style="font-size:12px;">
+      <input class="field-input field-time" type="time" value="10:00" style="font-size:12px;">
+    </div>
+    <!-- Row 3: Pasajeros + Promo + CTA -->
+    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+      <div style="font-family:var(--font);font-size:12px;font-weight:700;color:var(--mid);">Pasajeros</div>
+      <div class="pax-box">
+        <div class="pax-label">EDAD<br>25+</div>
+        <input class="pax-input" type="number" value="1" min="1" max="9">
+      </div>
+      <div class="pax-box">
+        <div class="pax-label">ADULTS<br>&nbsp;</div>
+        <input class="pax-input" type="number" value="0" min="0">
+      </div>
+      <div class="pax-box">
+        <div class="pax-label">NIÑOS<br>&nbsp;</div>
+        <input class="pax-input" type="number" value="0" min="0">
+      </div>
+      <div class="pax-box" style="flex:1;min-width:120px;">
+        <div class="pax-label">TIPO DE VEHÍCULO</div>
+        <select class="field-input" style="height:36px;padding:6px 10px;">
+          <option>TODOS</option>
+          <option>Compacto</option>
+          <option>Sedán</option>
+          <option>SUV</option>
+          <option>Minivan</option>
+          <option>Lujo</option>
+        </select>
+      </div>
+      <div class="promo-box" style="flex:1;min-width:140px;">
+        <label>Código de descuento aplicado</label>
+        <label>Código</label>
+        <input class="field-input" type="text" placeholder="rentadautos:cancun" style="font-size:12px;height:36px;padding:7px 10px;">
+      </div>
+      <button class="btn-reservar">RESERVAR AHORA</button>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO TEXT -->
+<section class="section intro-section">
+  <div class="inner">
+    <h2>¿Por qué rentar un auto desde Cancún?</h2>
+    <p>Tener un vehículo a tu disposición abre un abanico de posibilidades que el transporte público simplemente no puede cubrir. Aquí te presentamos los imperdibles que puedes conocer fácilmente en auto: Tulum y Playa Paraíso: A solo 2 horas de Cancún, puedes visitar la única zona arqueológica frente al mar y después relajarte en las suaves arenas de Playa Paraíso. La Ruta de los Cenotes: Ubicada cerca de Puerto Morelos, esta carretera es un paraíso para los amantes de la naturaleza. Con la renta de autos, puedes saltar de un cenote a otro (como el Cenote Zapote o Siete Bocas) sin prisas. Chichen Itzá y Valladolid: Conduce hasta el corazón de la Península de Yucatán.</p>
+    <p>Al llevar tu propio auto, puedes llegar temprano para evitar las multitudes y luego comer en el pintoresco pueblo mágico de Valladolid. Akumal: Ideal para un viaje corto de una hora. Estaciona tu auto Hertz y sumérgete en la bahía para nadar con tortugas marinas en su hábitat natural.</p>
+  </div>
+</section>
+
+<!-- PROMO + RENTA INFO -->
+<section class="section promo-renta-section">
+  <div class="inner">
+    <div class="promo-renta-grid">
+      <!-- Promo -->
+      <div class="promo-card">
+        <div class="promo-badge">
+          <span style="font-family:var(--font);font-size:18px;font-weight:900;color:var(--black);">Obtén hasta</span>
+          <span class="off-num">30%</span>
+          <span class="off-pct">OFF</span>
+          <div class="paypal-badge">
+            <span class="off-sub">y paga a 3, 4° o 6 MSI con</span>
+            <span class="paypal-logo">PayPal</span>
+          </div>
+        </div>
+        <div class="promo-car">🚗</div>
+      </div>
+      <!-- Renta info -->
+      <div class="renta-info">
+        <h3>Renta de autos en Cancún</h3>
+        <p class="highlight">Renta un carro en Cancún con hasta 45% OFF y viaja por la ciudad.</p>
+        <p>Si necesitas un coche en el centro o buscas renta de autos en el aeropuerto de Cancún, tenemos lo que necesitas. Consulta nuestros precios de renta de autos en Cancún y elige la mejor opción para ti.</p>
+        <p class="italic">Disfruta de lugares increíbles en Cancún junto a Hertz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ¿POR QUÉ RESERVAR? -->
+<section class="section porq-section">
+  <div class="inner">
+    <h2 class="section-title center">¿Por qué reservar con nosotros?</h2>
+    <div class="porq-grid">
+      <div class="porq-card">
+        <span class="porq-icon">🛡️</span>
+        <h4>Viaje seguro</h4>
+        <p>Tu seguridad y la de los tuyos es nuestra prioridad, te cuidamos en todos los detalles.</p>
+      </div>
+      <div class="porq-card">
+        <span class="porq-icon">🚙</span>
+        <h4>Flota renovada</h4>
+        <p>Contamos con una flota increíble a tu disposición, con máximo 2 años de uso.</p>
+      </div>
+      <div class="porq-card featured">
+        <span class="porq-icon">📱</span>
+        <h4>Reserva eficaz</h4>
+        <p>Reserva en línea y gestiona todos los detalles desde la web o aplicación móvil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENTAJAS -->
+<section class="section ventajas-section">
+  <div class="inner">
+    <h2>Ventajas de elegir Hertz en el paraíso</h2>
+    <p style="font-size:14px;color:var(--mid);margin-bottom:20px;">La renta de autos en Cancún puede ser abrumadora por la cantidad de opciones, pero Hertz destaca por ofrecer una experiencia fácil y segura.</p>
+
+    <div class="ventaja-item">
+      <strong>Recogida inmediata en el Aeropuerto (CUN):</strong>
+      <p>No pierdas tiempo esperando shuttles. Nuestra oficina en el aeropuerto te permite bajar del avión y subir a tu auto en minutos.</p>
+    </div>
+    <div class="ventaja-item">
+      <strong>Seguridad garantizada:</strong>
+      <p>Nuestras unidades son revisadas exhaustivamente para soportar el clima tropical, asegurando que tu única preocupación sea elegir qué música poner en el estéreo.</p>
+    </div>
+    <div class="ventaja-item">
+      <strong>Presencia total:</strong>
+      <p>Si decides viajar más allá y terminar tu viaje en Playa del Carmen o Tulum, contamos con oficinas estratégicas para que la devolución sea tan sencilla como la entrega.</p>
+    </div>
+
+    <div class="consejos-box">
+      <h4>Consejos para tu aventura en carretera</h4>
+      <p>Para que tu experiencia de renta de autos sea impecable, recuerda siempre llevar contigo tu licencia de conducir vigente y una tarjeta de crédito para el depósito de garantía. En Cancún, las carreteras principales como la Carretera Federal 307 están en excelentes condiciones, lo que permite disfrutar de un manejo seguro y cómodo hacia cualquier destino.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFICINAS / MAPA -->
+<section class="oficinas-section">
+  <div style="max-width:1100px;margin:0 auto;padding:32px 24px 0;font-family:var(--font);font-size:13px;font-weight:700;color:var(--mid);">Oficina más cercana</div>
+  <div style="max-width:1100px;margin:0 auto;" class="oficinas-layout">
+    <!-- Lista -->
+    <div class="oficinas-list">
+      <div class="oficinas-search">
+        <input type="text" placeholder="Buscar oficina...">
+        <div class="search-icon">🔍</div>
+      </div>
+      <div class="oficina-item active">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN AEROPUERTO (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN AEROPUERTO RETURN CENTER (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN GRAND OUTLET RIVIERA MAYA (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN PLAZA KUKULCAN (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN PLAZA LAS AMERICAS (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN WALMART (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN XCARET-CENTRO DE CONVENCIONES (CUN)</span>
+      </div>
+      <div class="oficina-item">
+        <span class="oi-icon">📍</span>
+        <span class="oi-name">CANCUN YAXCHILAN (CUN)</span>
+      </div>
+      <div class="servicios-especiales">
+        <span>✈</span> Servicios especiales
+      </div>
+      <div class="servicios-items">
+        <div class="serv-item"><span>✈</span> Localidad del aeropuerto</div>
+        <div class="serv-item"><span>⭐</span> Servicio Gold en el mostrador</div>
+      </div>
+    </div>
+
+    <!-- Mapa -->
+    <div class="mapa-center">
+      <div class="mapa-embed">
+        <!-- Road simulations -->
+        <div class="map-road" style="width:4px;height:100%;top:0;left:35%;opacity:0.7;"></div>
+        <div class="map-road" style="width:100%;height:4px;top:45%;left:0;opacity:0.7;"></div>
+        <div class="map-road" style="width:3px;height:60%;top:20%;left:55%;opacity:0.5;"></div>
+        <div class="map-road" style="width:70%;height:3px;top:65%;left:15%;opacity:0.5;"></div>
+        <!-- Place labels -->
+        <div class="maplabel" style="top:12%;left:60%;">Starbucks Aeropuerto<br>Cancún T4 Pa Ext</div>
+        <div class="maplabel" style="top:18%;right:8%;">Kalido Travel</div>
+        <div class="maplabel" style="top:32%;left:50%;">HERTZ CAR RETURN</div>
+        <div class="maplabel" style="bottom:30%;left:8%;">Terminal 1</div>
+        <div class="maplabel" style="bottom:22%;left:42%;">Chetumal</div>
+        <div class="maplabel" style="bottom:15%;left:48%;">Aeropuerto<br>Internacional<br>de Cancún</div>
+        <div class="maplabel" style="bottom:28%;right:6%;">Azul</div>
+        <div class="maplabel" style="bottom:18%;right:4%;">CancunVans</div>
+        <div class="maplabel" style="top:40%;right:6%;">Localiza Cancún<br>Aeropuerto</div>
+        <div class="maplabel" style="bottom:5%;left:30%;">Hilton Garden Inn</div>
+        <!-- Main pin -->
+        <div class="map-pin-main">
+          <div class="pin-circle"><span>H</span></div>
+          <div class="pin-label">Hertz CUN Aeropuerto</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail -->
+    <div class="oficina-detail">
+      <h3>CANCUN<br>AEROPUERTO (CUN)</h3>
+      <div class="detail-row">
+        <label>Dirección</label>
+        <p><strong>CARRETERA CANCUN-CHETUMAL KM 22<br>AEROPUERTO</strong><br>Código postal: 77500</p>
+      </div>
+      <div class="detail-row">
+        <label>Teléfono</label>
+        <p><strong>55912289000</strong></p>
+      </div>
+      <div class="detail-row">
+        <label>Horario Comercial</label>
+        <div class="hours-badge">Lunes a Domingo 24 Horas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉRMINOS Y CONDICIONES -->
+<section class="section terminos-section">
+  <div class="inner">
+    <div class="terminos-toggle" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.toggle-icon').style.transform = this.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)'">
+      <div class="toggle-icon">∨</div>
+      <h3>Términos y Condiciones</h3>
+    </div>
+    <div class="terminos-body">
+      <p>Aplica para reservaciones del 13 de abril al 12 de mayo de 2026, con pick up del 13 de abril al 15 de diciembre de 2026. Aplica a la tarifa rack vigente sin tiempo o kilometraje. Aplica en todas las localidades Hertz AYASA de la República Mexicana. El periodo mínimo de renta es de 1 día y el periodo máximo de 30 días, sin embargo, estos pueden variar conforme a lo establecido en el contrato. No es acumulable con otras promociones, descuentos u otros paquetes. Promoción "Modo Selección": El cliente podrá participar en las dinámicas "Modo Selección" para ganar premios exclusivos de la Selección Nacional de México 2026 al rentar un auto con un periodo de renovación mínimo de 2 días. El cliente deberá realizar obligatoriamente con un mínimo de 3 días, como coberturas indicadas en la promoción. El cliente deberá asegurarse de las reglas y los pasos de la Promoción en la página oficial de Hertz. Rentas de vehículos al momento de la contratación. Válido para una sola renta por cliente. Válido para flota regular (Chevrolet Beat, Matchback & Chevrolet Sport, Chevrolet Aveo & Chevrolet AVEO VW Jetta, Jetta a Diesel y Passat o October 200). Jeep Renegade, Nissan X-Trail. Incluye kilometraje libre y Responsabilidad Civil en danos y terecros para todos hasta por $1,000,000.00 MXN en el terceros. Incluye de cabacho, como local e IVA, no aplica en CDMX (Cross Border Xpress). Las coberturas son opcionales y adicionales. La cobertura de renta de auto deberá hacerse con el método de pago indicado al final del primer aviso. Aplica coberturas básicas-Plus: Cobertura de daños a terceros, licencia de conducir y tarjeta de identificación oficial de acuerdo al país de origen o residencia permanente, históricas de crédito, licencia de conducir vigente e identificación oficial de acuerdo al país de origen o residencia permanente. MXNI en términos particulares. El pago a 14 Meses Sin Intereses aplica únicamente para tarjetas de crédito Banamex. Con tarjetas de crédito Banamex, puedes pagar a 3 Meses Sin Intereses con un monto mínimo de compra de $5,000 MXN, Para pagar a 6 Meses Sin Intereses, se requiere un monto mínimo de compra de $3,000 MXN. El pago a 6 Meses Sin Intereses en tres tarjetas de diferentes siguientes bancos: Banco Azteca, Banorte, Banjercito, Banamex, Banregio, Falabella, Hey Banco, HSBC, Inbursa, Invex, Infix, Liverpool VISA, MNI Banco, Multiva, RappiCard, Santander, Scotiabank, Bbva y American Express. Las coberturas son opcionales y adicionales, sin embargo, para garantizar la reservación se necesita la autorización del vehículo. Cancelación y reembolso aplicable: Sin Penaliy no Penaliy no Penaliy encontrado. Para una experiencia de llegue a la discreción de acuerdo con Hertz deluxe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-row">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="logo-box" style="font-size:20px;">Hertz</div>
+        <div class="logo-sub" style="color:#888;">System<br>Licensee</div>
+      </div>
+      <div class="footer-badges">
+        <span class="badge">AYASA</span>
+        <span class="badge">Café de México</span>
+        <span class="badge">Q</span>
+        <span class="badge">AMVO</span>
+        <span class="badge">🏷 Hertz</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;color:#888;font-size:12px;">
+        <span>🌐 ESPAÑOL ▾</span>
+        <span>🇲🇽 México (MXN ▾)</span>
+      </div>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Soporte</h5>
+        <a href="#">Consulta reserva</a>
+        <a href="#">Ayuda</a>
+        <a href="#">Preguntas frecuentes</a>
+        <a href="#">Contáctanos</a>
+        <a href="#">Gold Plus Rewards</a>
+        <a href="#">Worldwide Rewards</a>
+        <a href="#">Avasa Members</a>
+      </div>
+      <div class="footer-col">
+        <h5>Políticas</h5>
+        <a href="#">Condiciones de renta</a>
+        <a href="#">Adicionales</a>
+        <a href="#">Términos electrónica</a>
+        <a href="#">Gold Plus</a>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Aviso de privacidad</a>
+      </div>
+      <div class="footer-col">
+        <h5>Empresas</h5>
+        <a href="#">Renta corporativos</a>
+        <a href="#">Auto satelital</a>
+        <a href="#">Pymes</a>
+        <a href="#">Servicios especiales</a>
+      </div>
+      <div class="footer-col">
+        <h5>Destinos</h5>
+        <a href="#">Renta de autos en Cancún</a>
+        <a href="#">Renta de autos en CDMX</a>
+        <a href="#">Renta de autos en Guadalajara</a>
+        <a href="#">Renta de autos en MTY</a>
+        <a href="#">Renta de autos en Los Cabos</a>
+        <a href="#">Renta de autos en Tulum</a>
+      </div>
+      <div class="footer-col">
+        <h5>Otros</h5>
+        <a href="#">Blog</a>
+        <a href="#">Ejercicio de viaje</a>
+        <a href="#">Convenios</a>
+        <a href="#">Extranet</a>
+      </div>
+      <div class="footer-col newsletter-col">
+        <h5>Suscríbete a nuestro Newsletter</h5>
+        <input type="email" placeholder="Introduce el correo electrónico aquí">
+        <button>INSCRÍBETE</button>
+        <p style="font-size:11px;color:#555;margin-top:8px;">Recibe las últimas noticias y ofertas de Hertz.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2024, Hertz México. Todos los derechos reservados.</span>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Aviso de privacidad</a>
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Términos y condiciones</a>
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Oficina item click
+  document.querySelectorAll('.oficina-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.oficina-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
