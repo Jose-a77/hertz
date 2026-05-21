@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hertz México - Renta de Autos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hertz-yellow: #FFD000;
+    --hertz-black: #1A1A1A;
+    --hertz-dark-gray: #333333;
+    --hertz-mid-gray: #666666;
+    --hertz-light-gray: #F5F5F5;
+    --hertz-border: #E0E0E0;
+    --hertz-green: #2E7D32;
+    --hertz-white: #FFFFFF;
+    --font-main: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--hertz-dark-gray);
+    background: var(--hertz-white);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: var(--hertz-black);
+    color: #aaa;
+    font-size: 12px;
+    padding: 6px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+  }
+  .topbar a { color: #ccc; text-decoration: none; font-size: 12px; }
+  .topbar .ayasa { color: var(--hertz-yellow); font-weight: 700; }
+  .topbar .login-btn {
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: var(--hertz-yellow);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .logo-box {
+    background: var(--hertz-black);
+    color: var(--hertz-yellow);
+    font-family: var(--font-main);
+    font-weight: 900;
+    font-size: 22px;
+    padding: 4px 10px;
+    letter-spacing: -0.5px;
+    border-radius: 3px;
+  }
+  .logo-sub {
+    font-family: var(--font-main);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--hertz-black);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    flex: 1;
+  }
+  .nav-links a {
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hertz-black);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .nav-links a:hover { background: rgba(0,0,0,0.1); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+  .nav-right select {
+    font-family: var(--font-main);
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 40%, #0d1f3c 100%);
+    background-image: url(pptx_extracted/ppt/media/photo-futbol.jfif);
+    background-size: cover;
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(0,40,120,0.5) 0%, transparent 60%);
+  }
+  .lightning {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      linear-gradient(120deg, transparent 48%, rgba(80,120,255,0.15) 50%, transparent 52%),
+      linear-gradient(60deg, transparent 55%, rgba(100,150,255,0.1) 57%, transparent 59%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    align-items: center;
+    gap: 24px;
+  }
+  .hero-text {
+    flex: 1.2;
+    color: var(--hertz-white);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-title {
+    font-family: var(--font-main);
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .hero-title span { color: var(--hertz-yellow); }
+  .hero-steps {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .hero-step {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1;
+    min-width: 140px;
+    backdrop-filter: blur(4px);
+  }
+  .step-num {
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-family: var(--font-main);
+    font-weight: 900;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .step-text { font-size: 12px; color: rgba(255,255,255,0.9); font-weight: 500; }
+  .btn-cta {
+    display: inline-block;
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(255,208,0,0.3);
+  }
+  .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,208,0,0.45); }
+  .hero-players {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+  }
+  .hero-players-img {
+    width: 100%;
+    max-width: 380px;
+    filter: drop-shadow(0 0 30px rgba(80,120,255,0.4));
+  }
+  .world-cup-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-align: center;
+    font-family: var(--font-main);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--hertz-black);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .world-cup-badge .wc-logo { font-size: 18px; display: block; }
+
+  /* ── SEARCH FORM ── */
+  .search-section {
+    background: var(--hertz-white);
+    background-color: #ffd000;
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .search-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .search-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+  .field-group label {
+    display: block;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--hertz-mid-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .field-group .field-row {
+    display: flex;
+    gap: 8px;
+  }
+  .field-group input, .field-group select {
+    width: 100%;
+    border: 1.5px solid var(--hertz-border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--hertz-dark-gray);
+    background: #fafafa;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-group input:focus, .field-group select:focus {
+    border-color: var(--hertz-yellow);
+    background: white;
+  }
+  .field-group .field-row input { flex: 1; }
+  .btn-search {
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    border: none;
+    padding: 12px 24px;
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 44px;
+  }
+  .btn-search:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,208,0,0.4); }
+  .promo-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--hertz-mid-gray);
+  }
+  .promo-row input[type=text] {
+    border: 1.5px solid var(--hertz-border);
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 12px;
+    width: 140px;
+    outline: none;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section { padding: 60px 24px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: var(--font-main);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: var(--hertz-black);
+    margin-bottom: 8px;
+  }
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--hertz-mid-gray);
+    margin-bottom: 36px;
+    max-width: 640px;
+  }
+
+  /* ── VENTAJAS ── */
+  .ventajas { background: var(--hertz-white); }
+  .ventajas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+  .ventaja-img {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  @media(min-width:900px) {
+    .ventajas-layout { display: flex; gap: 48px; align-items: flex-start; }
+    .ventajas-cards { flex: 1; }
+    .ventajas-photo { flex: 0 0 340px; }
+  }
+  .ventaja-card {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1.5px solid var(--hertz-border);
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .ventaja-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-color: var(--hertz-yellow); }
+  .ventaja-icon {
+    width: 40px; height: 40px;
+    background: var(--hertz-yellow);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .ventaja-body h3 {
+    font-family: var(--font-main);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--hertz-black);
+    margin-bottom: 4px;
+  }
+  .ventaja-body p { font-size: 13px; color: var(--hertz-mid-gray); }
+  .ventajas-photo {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  .ventajas-photo-placeholder {
+    background: linear-gradient(135deg, #f5e642 0%, #f0c000 100%);
+    background-image: url(pptx_extracted/ppt/media/hombre_conduciendo_auto_de_hertz_d272e390ef.jpg);
+    background-size: cover;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 64px;
+  }
+  .btn-secondary {
+    display: inline-block;
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: transform 0.2s;
+  }
+  .btn-secondary:hover { transform: translateY(-2px); }
+
+  /* ── MAPA ── */
+  .mapa-section { background: var(--hertz-light-gray); }
+  .mapa-title-area {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .mapa-subtitle { color: var(--hertz-mid-gray); font-size: 15px; }
+  .mapa-container {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.1);
+    background: #e8f4e8;
+    background-image: url(pptx_extracted/ppt/media/mexico-png.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mapa-mexico {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+  }
+  .mapa-placeholder {
+    background: #ffffff70;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    font-family: var(--font-main);
+  }
+  .mapa-placeholder .big-icon { font-size: 64px; }
+  .mapa-placeholder h3 { font-size: 22px; font-weight: 800; color: #1b5e20; }
+  .mapa-placeholder p { font-size: 14px; color: #388e3c; }
+  .mapa-pins {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .map-pin {
+    position: absolute;
+    background: var(--hertz-black);
+    color: var(--hertz-yellow);
+    font-family: var(--font-main);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .map-pin::before { content: '📍'; font-size: 10px; }
+
+  /* ── LÍDER SECTION ── */
+  .lider-section {
+    background: var(--hertz-black);
+    color: var(--hertz-white);
+    padding: 60px 24px;
+  }
+  .lider-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+  .lider-text h2 {
+    font-family: var(--font-main);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--hertz-white);
+  }
+  .lider-text p { font-size: 14px; color: #bbb; line-height: 1.7; margin-bottom: 12px; }
+  .btn-outline {
+    display: inline-block;
+    border: 2px solid var(--hertz-yellow);
+    color: var(--hertz-yellow);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 30px;
+  }
+  .btn-outline:hover { background: var(--hertz-yellow); color: var(--hertz-black); }
+
+  /* ── FLOTA ── */
+  .flota-section { background: var(--hertz-white); }
+  .flota-card {
+    background: var(--hertz-light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--hertz-border);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .flota-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .flota-img {
+    background-image: url(pptx_extracted/ppt/media/auto-hertz.png);
+    background-size: cover;
+    background-position: center;
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    border-bottom: 1px solid var(--hertz-border);
+  }
+  .flota-info { padding: 16px; }
+  .flota-info h4 {
+    font-family: var(--font-main);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--hertz-black);
+    margin-bottom: 4px;
+  }
+  .flota-info p { font-size: 12px; color: var(--hertz-mid-gray); }
+  .flota-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  /* ── OPINIONES ── */
+  .opiniones-section { background: var(--hertz-light-gray); }
+  .stars { color: #FFD000; font-size: 16px; letter-spacing: 1px; margin-bottom: 6px; }
+  .opinion-card {
+    background: var(--hertz-white);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1.5px solid var(--hertz-border);
+    transition: box-shadow 0.2s;
+  }
+  .opinion-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .opinion-text { font-size: 13px; color: var(--hertz-mid-gray); margin-bottom: 12px; line-height: 1.6; }
+  .opinion-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--hertz-yellow);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--hertz-black);
+  }
+  .author-name { font-family: var(--font-main); font-size: 13px; font-weight: 700; color: var(--hertz-black); }
+  .author-meta { font-size: 11px; color: #999; }
+  .opiniones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  /* ── DESTINOS ── */
+  .destinos-section { background: var(--hertz-white); }
+  .destinos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .destino-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid var(--hertz-border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .destino-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  .destino-img {
+    height: 130px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .destino-img.cancun { background: linear-gradient(135deg, #00bcd4, #0097a7); }
+  .destino-img.cdmx { background: linear-gradient(135deg, #78909c, #546e7a); }
+  .destino-img.gdl { background: linear-gradient(135deg, #f57c00, #e65100); }
+  .destino-img.mty { background: linear-gradient(135deg, #7b1fa2, #4a148c); }
+  .destino-name {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--hertz-black);
+    padding: 12px 14px 4px;
+  }
+  .destino-link { font-size: 12px; color: var(--hertz-green); padding: 0 14px 12px; display: block; }
+
+  /* ── SEGURIDAD ── */
+  .seguridad-section { background: var(--hertz-light-gray); }
+  .seguridad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .seg-card {
+    background: var(--hertz-white);
+    border-radius: 10px;
+    padding: 22px;
+    border: 1.5px solid var(--hertz-border);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .seg-icon { font-size: 28px; flex-shrink: 0; }
+  .seg-body h4 { font-family: var(--font-main); font-size: 14px; font-weight: 700; color: var(--hertz-black); margin-bottom: 4px; }
+  .seg-body p { font-size: 13px; color: var(--hertz-mid-gray); }
+
+  /* ── BLOG ── */
+  .blog-section { background: var(--hertz-white); }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .blog-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid var(--hertz-border);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .blog-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .blog-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+    position: relative;
+  }
+  .blog-img.shark { background: linear-gradient(135deg, #0277bd, #01579b); }
+  .blog-img.license { background: linear-gradient(135deg, #388e3c, #1b5e20); }
+  .blog-img.suv { background: linear-gradient(135deg, #d32f2f, #b71c1c); }
+  .blog-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--hertz-yellow);
+    color: var(--hertz-black);
+    font-family: var(--font-main);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .blog-content { padding: 18px; }
+  .blog-content h4 {
+    font-family: var(--font-main);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--hertz-black);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .blog-content p { font-size: 13px; color: var(--hertz-mid-gray); line-height: 1.5; margin-bottom: 12px; }
+  .blog-link { font-size: 13px; color: var(--hertz-green); font-weight: 600; text-decoration: none; }
+  .blog-link:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--hertz-black);
+    color: #aaa;
+    padding: 48px 24px 24px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #333;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+  .footer-col h5 {
+    font-family: var(--font-main);
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--hertz-white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--hertz-yellow); }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: #666;
+  }
+  .footer-badges {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #ccc;
+    font-family: var(--font-main);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 768px) {
+    nav .nav-links { display: none; }
+    .hero-content { flex-direction: column; padding: 24px 16px; }
+    .hero-players { display: none; }
+    .search-grid { grid-template-columns: 1fr; }
+    .btn-search { width: 100%; }
+    .lider-inner { grid-template-columns: 1fr; }
+    .section { padding: 40px 16px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width: 480px) {
+    .hero-steps { flex-direction: column; }
+    .hero-step { min-width: unset; }
+  }
+
+  /* ── VIAJA CON HERTZ ── */
+  .viaja-section {
+    background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%);
+    padding: 60px 24px;
+  }
+  .viaja-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .viaja-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--hertz-border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .viaja-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+  .viaja-img {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+  }
+  .viaja-img.tiburon { background: linear-gradient(135deg, #0277bd 0%, #4dd0e1 100%); }
+  .viaja-img.licencia { background: linear-gradient(135deg, #388e3c 0%, #aed581 100%); }
+  .viaja-img.suv2 { background: linear-gradient(135deg, #5d4037 0%, #a1887f 100%); }
+  .viaja-content { padding: 20px; }
+  .viaja-content h4 {
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--hertz-black);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .viaja-content p { font-size: 13px; color: var(--hertz-mid-gray); margin-bottom: 12px; line-height: 1.6; }
+  .viaja-link { font-size: 13px; color: var(--hertz-green); font-weight: 700; text-decoration: none; }
+  .viaja-cta-box {
+    background: var(--hertz-yellow);
+    border-radius: 14px;
+    padding: 36px;
+    text-align: center;
+  }
+  .viaja-cta-box h3 {
+    font-family: var(--font-main);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 900;
+    color: var(--hertz-black);
+    margin-bottom: 10px;
+  }
+  .viaja-cta-box p { font-size: 14px; color: #555; margin-bottom: 20px; }
+  .btn-dark {
+    display: inline-block;
+    background: var(--hertz-black);
+    color: var(--hertz-white);
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .btn-dark:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="#">Servicios</a>
+  <a href="#">Consultar reserva</a>
+  <span>🌐 ESPAÑOL ▾</span>
+  <a href="#" class="ayasa">AYASA Member</a>
+  <a href="#" class="login-btn">INICIAR SESIÓN</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <div class="logo-box">Hertz</div>
+    <div class="logo-sub">System<br>Licensee</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Promociones</a></li>
+    <li><a href="#">Flota</a></li>
+    <li><a href="#">Oficinas</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Consultar reserva</a></li>
+  </ul>
+  <div class="nav-right">
+    <span>🌐</span>
+    <select><option>ESPAÑOL</option><option>ENGLISH</option></select>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="lightning"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Modo Selección — Activado</div>
+      <h1 class="hero-title">
+        <span>Solo Hertz</span> te lleva a los partidos<br>
+        de la Selección Nacional de México 2026
+      </h1>
+      <div class="hero-steps">
+        <div class="hero-step">
+          <div class="step-num">1</div>
+          <div class="step-text">Renta un auto por 2 días o más</div>
+        </div>
+        <div class="hero-step">
+          <div class="step-num">2</div>
+          <div class="step-text">Agrega la cobertura adicional</div>
+        </div>
+        <div class="hero-step">
+          <div class="step-num">3</div>
+          <div class="step-text">Recibe el link para participar</div>
+        </div>
+      </div>
+      <a href="#" class="btn-cta">Comienza ahora</a>
+      <p style="color:rgba(255,255,255,0.5);font-size:11px;margin-top:10px;">Cada renta con seguro opcional te da puntos para ganar. Aplican restricciones y pasos a los partidos más esperados del 2026.</p>
+    </div>
+    <div class="hero-players">
+      <div class="world-cup-badge">
+        <span class="wc-logo">🏆</span>
+        <strong>Mundial 2026</strong><br>México · USA · Canadá
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH FORM -->
+<section class="search-section">
+  <div class="search-wrapper">
+    <div class="search-grid">
+      <div class="field-group">
+        <label>Recogida</label>
+        <div class="field-row">
+          <input type="text" placeholder="¿Dónde necesitas tu auto?">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Fecha de recogida</label>
+        <div class="field-row">
+          <input type="date">
+          <input type="time" value="10:00" style="max-width:90px;">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Devolución</label>
+        <div class="field-row">
+          <input type="text" placeholder="¿Dónde termina tu viaje?">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Fecha de devolución</label>
+        <div class="field-row">
+          <input type="date">
+          <input type="time" value="10:00" style="max-width:90px;">
+        </div>
+      </div>
+      <button class="btn-search">Ver vehículos</button>
+    </div>
+    <div class="promo-row">
+      <span>Código de descuento:</span>
+      <input type="text" placeholder="Código">
+    </div>
+  </div>
+</section>
+
+<!-- VENTAJAS -->
+<section class="section ventajas">
+  <div class="section-inner">
+    <h2 class="section-title">Ventajas de rentar un auto con Hertz México</h2>
+    <div class="ventajas-layout">
+      <div class="ventajas-cards">
+        <div class="ventaja-card">
+          <div class="ventaja-icon">🗺️</div>
+          <div class="ventaja-body">
+            <h3>En todo México</h3>
+            <p>Con más de 180 oficinas, estamos presentes en todos los aeropuertos y las principales ciudades del país.</p>
+          </div>
+        </div>
+        <div class="ventaja-card">
+          <div class="ventaja-icon">🚗</div>
+          <div class="ventaja-body">
+            <h3>Flota nueva y moderna</h3>
+            <p>Conducirás la flota más grande, moderna y segura. Renovamos nuestra flota a un periodo máximo de 12 meses.</p>
+          </div>
+        </div>
+        <div class="ventaja-card">
+          <div class="ventaja-icon">🌱</div>
+          <div class="ventaja-body">
+            <h3>Cuidando al planeta</h3>
+            <p>Somos la única empresa en México que compensa su huella de carbono, y la primera empresa de renta de autos en el territorio en adherirse al estándar zero21.</p>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--hertz-mid-gray);margin-top:8px;">Sin importar a qué rincón de México vayas, siempre podrás contar con la flota más grande y moderna del país, un servicio de primer nivel y beneficios especiales para ti.</p>
+        <a href="#" class="btn-secondary">Reserva ahora</a>
+      </div>
+      <div class="ventajas-photo">
+        <div class="ventajas-photo-placeholder"> </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="section mapa-section">
+  <div class="section-inner">
+    <div class="mapa-title-area">
+      <h2 class="section-title">Presencia nacional: Estamos donde tú estés</h2>
+      <p class="mapa-subtitle">Con oficinas en todo el país, nos encontramos a la vuelta de la esquina.</p>
+    </div>
+    <div class="mapa-container">
+      <div class="mapa-placeholder">
+        <div class="big-icon">🇲🇽</div>
+        <h3>México — Cobertura Nacional</h3>
+        <p>+180 oficinas en aeropuertos y ciudades principales</p>
+      </div>
+      <div class="mapa-pins">
+        <div class="map-pin" style="top:20%;left:15%">Puerto Vallarta</div>
+        <div class="map-pin" style="top:35%;left:45%">CDMX</div>
+        <div class="map-pin" style="top:18%;left:55%">Monterrey</div>
+        <div class="map-pin" style="top:65%;left:72%">Cancún</div>
+        <div class="map-pin" style="top:40%;left:28%">Guadalajara</div>
+        <div class="map-pin" style="top:55%;left:50%">Oaxaca</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <a href="#" class="btn-secondary">Encontrar oficinas cerca</a>
+    </div>
+  </div>
+</section>
+
+<!-- LÍDER -->
+<section class="lider-section">
+  <div class="lider-inner">
+    <div class="lider-text">
+      <h2>Hertz Líder en la Renta de Autos en México</h2>
+      <p>Cuando se trata de elegir un aliado para el camino, Hertz México se posiciona como la opción líder, combinando una trayectoria global con un conocimiento profundo del territorio nacional. Si necesitas un auto para negocios o para Viajes Premium, acceder a mejores promociones o contribuir al cuidado del medio ambiente, es posible que rentes un auto con Hertz México. Reserva en pocos pasos y vive tu libertad en movimiento.</p>
+      <p>Una de las mejores ventajas de elegir a Hertz es nuestra red de oficinas en toda la República Mexicana. Contamos con presencia estratégica en los principales aeropuertos y ciudades del país, ¿Eres de Cancún o Tijuana para viajes de negocios? ¿O quizás buscas el folklore de Oaxaca o la emocionante cultura de Monterrey?</p>
+      <p>Nuestras coberturas garantizan que, siempre habrá un centro de atención cerca, si algún evento fuera de lo común se presentara. Nuestra infraestructura nos permite garantizar fiabilidad total, incluyendo la opción de recoger tu vehículo en una ciudad y entregarlo en otra, facilitando así tus traslados y coachings individualizados.</p>
+      <p><strong style="color:#fff;">Los destinos principales que se mencionan:</strong> Cancún y Riviera Maya, Tulum y otras zonas arqueológicas. Ciudad de México, Monterrey con su aplicación para la capital financiera y cultural. Los Cabos y Puerto Vallarta. Oaxaca por su mezcal, su cocina y letra bonita. Guadalajara y Monterrey. Optimiza tus tiempos en los destinos nacionales más populares.</p>
+      <a href="#" class="btn-outline">Encontrar oficinas cerca</a>
+    </div>
+    <div style="font-size:80px;opacity:0.15;font-family:var(--font-main);font-weight:900;color:white;text-align:center;line-height:1;">H<br>E<br>R<br>T<br>Z</div>
+  </div>
+</section>
+
+<!-- FLOTA -->
+<section class="section flota-section">
+  <div class="section-inner">
+    <h2 class="section-title">Conoce nuestra flota</h2>
+    <p class="section">Desde autos compactos como el <strong>Fiat Mobi</strong>, ideales para desplazamientos ágiles, hasta sedanes elegantes y espaciosos como el <strong>Alfa Romeo Tonale</strong>, <strong>Volkswagen Jetta</strong> y <strong>MG5</strong> perfectos para viajes con mayor comodidad.</p>
+    <div class="flota-grid">
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>Fiat Mobi</h4><p>Compacto · Ideal ciudad</p></div>
+      </div>
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>Volkswagen Jetta</h4><p>Sedán · Confort premium</p></div>
+      </div>
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>Alfa Romeo Tonale</h4><p>SUV · Elegante y potente</p></div>
+      </div>
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>MG5</h4><p>Sedán · Espacioso y moderno</p></div>
+      </div>
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>Mercedes Benz</h4><p>Volvo · Elegante y potente</p></div>
+      </div>
+      <div class="flota-card">
+        <div class="flota-img"></div>
+        <div class="flota-info"><h4>Toyota</h4><p>Vagon · Espacioso y moderno</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#" class="btn-secondary">Reserva ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- OPINIONES -->
+<section class="section opiniones-section">
+  <div class="section-inner">
+    <h2 class="section-title" style="text-align:center;">Opiniones de Usuarios</h2>
+    <p class="section-subtitle" style="text-align:center;margin:0 auto 32px;">Lo que dicen nuestros clientes sobre su experiencia con Hertz México.</p>
+    <div class="opiniones-grid">
+      <div class="opinion-card">
+        <div class="stars">★★★★★</div>
+        <p class="opinion-text">"Great service! The staff was very professional, easy going & gave great recommendations. Absolutely loved my experience!"</p>
+        <div class="opinion-author">
+          <div class="avatar">C</div>
+          <div><div class="author-name">Courtney P.</div><div class="author-meta">5 estrellas · hace 2 días</div></div>
+        </div>
+      </div>
+      <div class="opinion-card">
+        <div class="stars">★★★★★</div>
+        <p class="opinion-text">"We had the most beautiful couples experience. The staff was incredibly professional, easy going & gave great recommendations. Amazing!"</p>
+        <div class="opinion-author">
+          <div class="avatar">C</div>
+          <div><div class="author-name">Clara Budden</div><div class="author-meta">5 estrellas · hace 3 días</div></div>
+        </div>
+      </div>
+      <div class="opinion-card">
+        <div class="stars">★★★★★</div>
+        <p class="opinion-text">"I had Andres, and he was just wow! Professional and simply amazing. The way they treat you is simply amazing. 100% recommended."</p>
+        <div class="opinion-author">
+          <div class="avatar">A</div>
+          <div><div class="author-name">Aida J.</div><div class="author-meta">5 estrellas · hace 1 semana</div></div>
+        </div>
+      </div>
+      <div class="opinion-card">
+        <div class="stars">★★★★★</div>
+        <p class="opinion-text">"We did the most beautiful experience. The staff was incredibly professional, easy going & gave great recommendations. Loved it!"</p>
+        <div class="opinion-author">
+          <div class="avatar">C</div>
+          <div><div class="author-name">Clara Budden</div><div class="author-meta">5 estrellas · hace 1 semana</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINOS -->
+<section class="section destinos-section">
+  <div class="section-inner">
+    <h2 class="section-title" style="text-align:center;">Descubre nuestros destinos</h2>
+    <p class="section-subtitle" style="text-align:center;margin:0 auto 32px;">Encuentra el auto perfecto para explorar México en cualquiera de nuestras ciudades.</p>
+    <div class="destinos-grid">
+      <div class="destino-card">
+        <div class="destino-img cancun">🏖️</div>
+        <div class="destino-name">Cancún</div>
+        <a href="#" class="destino-link">Consulta la información esencial de renta de autos en Cancún →</a>
+      </div>
+      <div class="destino-card">
+        <div class="destino-img cdmx">🏙️</div>
+        <div class="destino-name">CDMX</div>
+        <a href="#" class="destino-link">Consulta la información esencial de renta de autos en CDMX →</a>
+      </div>
+      <div class="destino-card">
+        <div class="destino-img gdl">🏛️</div>
+        <div class="destino-name">Guadalajara</div>
+        <a href="#" class="destino-link">Consulta la información esencial de renta de autos en Guadalajara →</a>
+      </div>
+      <div class="destino-card">
+        <div class="destino-img mty">🏔️</div>
+        <div class="destino-name">Monterrey</div>
+        <a href="#" class="destino-link">Consulta la información esencial de renta de autos en Monterrey →</a>
+      </div>
+      <div class="destino-card">
+        <div class="destino-img gdl">🏔️</div>
+        <div class="destino-name">Tijuana</div>
+        <a href="#" class="destino-link">Consulta la información esencial de renta de autos en Tijuana →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURIDAD -->
+<section class="section seguridad-section">
+  <div class="section-inner">
+    <h2 class="section-title">Seguridad y confianza en cada kilómetro</h2>
+    <p class="section">Sabremos que al rentar una de nuestras unidades, lo primero es tu seguridad. Por eso, la seguridad es la primera promesa. Por eso, no solo rentas un vehículo: aseguras la tranquilidad del viaje en vehículos sometidos a rigurosos estándares de mantenimiento y limpieza.</p>
+    <div class="seguridad-grid">
+      <div class="seg-card">
+        <div class="seg-icon">🚗</div>
+        <div class="seg-body">
+          <h4>Vehículos compactos</h4>
+          <p>Para moverse en la ciudad, hasta SUVs robustas para viajes familiares o carreteras; lo tuyo para quienes necesiten más del confort.</p>
+        </div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">📱</div>
+        <div class="seg-body">
+          <h4>Atención digital 24/7</h4>
+          <p>Cada unidad está equipada con tecnología de punta y respaldada por nuestro sistema de asistencia vial las 24 horas, los 365 días del año.</p>
+        </div>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon">📍</div>
+        <div class="seg-body">
+          <h4>Rentabilidad y calidad</h4>
+          <p>Ofrecemos calidad eventualidad, marca récords solo con calidad excepcionalidad, marca récords solo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIAJA CON HERTZ -->
+<section class="section viaja-section">
+  <div class="section-inner">
+    <h2 class="section-title">Viaja con Hertz México</h2>
+    <p class="section-subtitle">Posibilidades únicas para descubrir con Hertz México la libertad en movimiento.</p>
+    <div class="viaja-grid">
+      <div class="viaja-card">
+        <div class="viaja-img tiburon">🦈</div>
+        <div class="viaja-content">
+          <h4>Tiburón Ballena 2026: Guía para Holbox e Islas Mujeres</h4>
+          <p>¿Quieres vivir este avistamiento único? Este año en Quinceañero te contamos cómo planear la experiencia de avistamiento con la libertad de un auto rentado.</p>
+          <a href="#" class="viaja-link">Leer Historia →</a>
+        </div>
+      </div>
+      <div class="viaja-card">
+        <div class="viaja-img licencia">🪪</div>
+        <div class="viaja-content">
+          <h4>Guía 2026: Licencia de conducir en México para extranjeros</h4>
+          <p>¿Planeas conducir en México este 2026? Resolvemos todas tus dudas sobre los requisitos y permisos que necesitas, sin complicaciones.</p>
+          <a href="#" class="viaja-link">Leer Historia →</a>
+        </div>
+      </div>
+      <div class="viaja-card">
+        <div class="viaja-img suv2">🚙</div>
+        <div class="viaja-content">
+          <h4>Renta de SUV y Minivan para el Mundial 2026 en México</h4>
+          <p>El transporte de tu equipo no puede fallar. Con un periodo de renovación máximo de 14 meses, siempre seguro y a bordo de la flota más nueva.</p>
+          <a href="#" class="viaja-link">Leer Historia →</a>
+        </div>
+      </div>
+    </div>
+    <div class="viaja-cta-box">
+      <h3>Renta fácil y cómodo con Hertz México</h3>
+      <p>Accede a grandes promociones y beneficios exclusivos. Encuéntrate en los principales aeropuertos, ciudades y destinos turísticos del país. Viaja en la flota más grande y moderna del auto mejor actualizada en México. Con un periodo de renovación máximo de 14 meses, siempre seguro y a bordo de la flota más nueva. Además, confírmale el cuidado del medio ambiente con nuestro programa de compensación de huella de carbono. Reserva ahora y comienza a disfrutar la libertad en movimiento.</p>
+      <a href="#" class="btn-dark">Reserva ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-row">
+      <div class="logo">
+        <div class="logo-box" style="font-size:20px;">Hertz</div>
+        <div class="logo-sub" style="color:#888;">System<br>Licensee</div>
+      </div>
+      <div class="footer-badges">
+        <span class="badge">AYASA</span>
+        <span class="badge">Q</span>
+        <span class="badge">AMVO</span>
+        <span class="badge">🏷 Hertz</span>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Productos</h5>
+        <a href="#">Hertz 2026</a>
+        <a href="#">Flota</a>
+        <a href="#">Pymes</a>
+        <a href="#">Empresas</a>
+        <a href="#">Aeropuertos</a>
+        <a href="#">Avasa Members</a>
+      </div>
+      <div class="footer-col">
+        <h5>Políticas</h5>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Adicionales</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Auto satelital</a>
+        <a href="#">Aviso de privacidad</a>
+      </div>
+      <div class="footer-col">
+        <h5>Clientes</h5>
+        <a href="#">Reservar</a>
+        <a href="#">Modificar reserva</a>
+        <a href="#">Cancelar reserva</a>
+        <a href="#">Servicios especiales</a>
+      </div>
+      <div class="footer-col">
+        <h5>Rentas en</h5>
+        <a href="#">Renta de autos en Cancún</a>
+        <a href="#">Renta de autos en CDMX</a>
+        <a href="#">Renta de autos en GDL</a>
+        <a href="#">Renta de autos en MTY</a>
+        <a href="#">Renta de autos en Los Cabos</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <a href="#">Agente de reservas</a>
+        <a href="#">Renta en el Aeropuerto</a>
+        <a href="#">Renta en la ciudad</a>
+        <a href="#">Llámanos</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Recibe noticias y ofertas</a>
+        <a href="#">INSCRÍBETE</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Hertz México. Todos los derechos reservados.</span>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Aviso de privacidad</a>
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Términos y condiciones</a>
+        <a href="#" style="color:#555;text-decoration:none;font-size:11px;">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
